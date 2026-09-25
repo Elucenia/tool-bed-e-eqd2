@@ -1,0 +1,19 @@
+{
+  "name": "@elucenia/tool-bed-e-eqd2",
+  "version": "0.1.0",
+  "description": "BED e EQD2",
+  "main": "calculator.js",
+  "type": "commonjs",
+  "license": "MIT",
+  "scripts": {
+    "test": "node test.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Elucenia/tool-bed-e-eqd2.git"
+  }
+}

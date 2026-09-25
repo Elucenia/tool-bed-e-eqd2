@@ -1,0 +1,83 @@
+[
+  {
+    "label": "60 Gy em 30 frações, α/β 10: BED 72, EQD2 60",
+    "input": {
+      "dose": 2,
+      "n": 30,
+      "ab": "10"
+    },
+    "expected": {
+      "raw": {
+        "bed": 72,
+        "eqd2": 60
+      },
+      "main": "60,0"
+    },
+    "originalInput": {
+      "dose": 2,
+      "n": 30,
+      "ab": "10"
+    },
+    "expandedZeroOptions": []
+  },
+  {
+    "label": "20 Gy em 5 × 4 Gy, α/β 3: BED 46,67, EQD2 28",
+    "input": {
+      "dose": 4,
+      "n": 5,
+      "ab": "3"
+    },
+    "expected": {
+      "raw": {
+        "bed": 46.667,
+        "eqd2": 28
+      }
+    },
+    "originalInput": {
+      "dose": 4,
+      "n": 5,
+      "ab": "3"
+    },
+    "expandedZeroOptions": []
+  },
+  {
+    "label": "60 Gy em 20 × 3 Gy, α/β 1,5: BED 180, EQD2 77,14",
+    "input": {
+      "dose": 3,
+      "n": 20,
+      "ab": "1.5"
+    },
+    "expected": {
+      "raw": {
+        "bed": 180,
+        "eqd2": 77.143
+      }
+    },
+    "originalInput": {
+      "dose": 3,
+      "n": 20,
+      "ab": "1.5"
+    },
+    "expandedZeroOptions": []
+  },
+  {
+    "label": "Dose única de 8 Gy, α/β 10: BED 14,4, EQD2 12",
+    "input": {
+      "dose": 8,
+      "n": 1,
+      "ab": "10"
+    },
+    "expected": {
+      "raw": {
+        "bed": 14.4,
+        "eqd2": 12
+      }
+    },
+    "originalInput": {
+      "dose": 8,
+      "n": 1,
+      "ab": "10"
+    },
+    "expandedZeroOptions": []
+  }
+]

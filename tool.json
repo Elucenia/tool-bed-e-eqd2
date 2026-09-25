@@ -1,0 +1,196 @@
+{
+  "tool": {
+    "id": "bed-e-eqd2",
+    "title": "BED e EQD2",
+    "short": "Dose biológica efetiva e equivalente em 2 Gy",
+    "desc": "Calcula a dose biológica efetiva (BED) e a dose equivalente em frações de 2 Gy (EQD2) pelo modelo linear-quadrático, com α/β escolhido.",
+    "lead": "Compara esquemas de radioterapia com fracionamentos diferentes, convertendo a dose física em BED e em EQD2 para o tecido de interesse.",
+    "spec": [
+      "radioterapia",
+      "oncologia-clinica"
+    ],
+    "tier": 1,
+    "fields": [
+      [
+        "dose",
+        "Dose por fração (d)",
+        "num",
+        {
+          "min": 0.5,
+          "max": 30,
+          "step": 0.01,
+          "unit": "Gy",
+          "ph": "2"
+        }
+      ],
+      [
+        "n",
+        "Número de frações (n)",
+        "num",
+        {
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "unit": "frações",
+          "ph": "30"
+        }
+      ],
+      [
+        "ab",
+        "Razão α/β do tecido",
+        "sel",
+        {
+          "opts": {
+            "2": "2 Gy · medula espinhal, SNC",
+            "3": "3 Gy · tecidos de reação tardia (valor usual)",
+            "10": "10 Gy · tumores em geral e tecidos de reação aguda",
+            "1.5": "1,5 Gy · câncer de próstata"
+          }
+        }
+      ]
+    ],
+    "formula": "<p><strong>BED = n × d × (1 + d ÷ α/β)</strong></p><p><strong>EQD2 = BED ÷ (1 + 2 ÷ α/β)</strong> = n × d × (d + α/β) ÷ (2 + α/β)</p><p>Modelo linear-quadrático sem correção para tempo total de tratamento (repopulação) nem para reparo incompleto.</p>",
+    "table": [
+      [
+        "Esquema",
+        "α/β",
+        "BED",
+        "EQD2"
+      ],
+      [
+        "60 Gy em 30 × 2 Gy",
+        "10",
+        "72 Gy",
+        "60 Gy"
+      ],
+      [
+        "20 Gy em 5 × 4 Gy",
+        "3",
+        "46,7 Gy",
+        "28 Gy"
+      ],
+      [
+        "60 Gy em 20 × 3 Gy",
+        "1,5",
+        "180 Gy",
+        "77,1 Gy"
+      ]
+    ],
+    "tips": [
+      "Some BED ou EQD2 só se o α/β for o mesmo: a soma de doses de tecidos diferentes (tumor e órgão de risco) não faz sentido.",
+      "Para órgãos de risco em reirradiação, calcule com o α/β de efeito tardio (2 a 3 Gy) e considere a recuperação parcial com o tempo, que o modelo não inclui.",
+      "O modelo não considera a repopulação do tumor: prolongar o tempo total (interrupções) reduz o efeito, especialmente em cabeça e pescoço e colo do útero.",
+      "Em SBRT e radiocirurgia (doses altas por fração), o modelo linear-quadrático tende a superestimar o efeito; use com cautela e compare com os dados clínicos do esquema."
+    ],
+    "sources": [
+      [
+        "Fowler JF. The linear-quadratic formula and progress in fractionated radiotherapy. Br J Radiol, 1989.",
+        "https://doi.org/10.1259/0007-1285-62-740-679"
+      ],
+      [
+        "Fowler JF. 21 years of biologically effective dose. Br J Radiol, 2010.",
+        "https://doi.org/10.1259/bjr/31372149"
+      ]
+    ],
+    "cases": [
+      [
+        "60 Gy em 30 frações, α/β 10: BED 72, EQD2 60",
+        {
+          "dose": 2,
+          "n": 30,
+          "ab": "10"
+        },
+        {
+          "raw": {
+            "bed": 72,
+            "eqd2": 60
+          },
+          "main": "60,0"
+        }
+      ],
+      [
+        "20 Gy em 5 × 4 Gy, α/β 3: BED 46,67, EQD2 28",
+        {
+          "dose": 4,
+          "n": 5,
+          "ab": "3"
+        },
+        {
+          "raw": {
+            "bed": 46.667,
+            "eqd2": 28
+          }
+        }
+      ],
+      [
+        "60 Gy em 20 × 3 Gy, α/β 1,5: BED 180, EQD2 77,14",
+        {
+          "dose": 3,
+          "n": 20,
+          "ab": "1.5"
+        },
+        {
+          "raw": {
+            "bed": 180,
+            "eqd2": 77.143
+          }
+        }
+      ],
+      [
+        "Dose única de 8 Gy, α/β 10: BED 14,4, EQD2 12",
+        {
+          "dose": 8,
+          "n": 1,
+          "ab": "10"
+        },
+        {
+          "raw": {
+            "bed": 14.4,
+            "eqd2": 12
+          }
+        }
+      ]
+    ],
+    "batch": "onco-diagnostico",
+    "kind": "Calculadora",
+    "config": null,
+    "areaId": "onco-diagnostico",
+    "clinicalReview": "pending",
+    "sourceReview": "pending",
+    "sourceFile": "app/content/ferramentas/onco-diagnostico.php",
+    "arithmeticTest": {
+      "status": "passed",
+      "testedAt": "2026-09-25",
+      "total": 4,
+      "passed": 4,
+      "failures": []
+    },
+    "independentArithmeticTest": {
+      "status": "not-tested",
+      "testedAt": null,
+      "total": 0,
+      "passed": 0,
+      "cases": []
+    }
+  },
+  "review": {
+    "id": "bed-e-eqd2",
+    "status": "restricted",
+    "reason": "A saída converte dose de radioterapia por modelo biológico simplificado, aceita até 30 Gy/fração e não modela tempo, reparo ou recuperação. Requer revisão de física médica por cenário antes de uso no acervo como cálculo assistencial.",
+    "sourceUrl": "https://www.eviq.org.au/clinical-resources/eviq-calculators/3197-biologically-effective-dose-bed-and-equival",
+    "sourceTitle": "eviQ — Biologically effective dose and equivalent dose calculators",
+    "sourceDate": "Revisão interna em 2022-01-19; consulta em 2026-09-25",
+    "publisherRegion": "Austrália / eviQ",
+    "checkedAt": "2026-09-25",
+    "clinicalValidation": "not-performed",
+    "reviewScope": "triagem por risco e finalidade da saída principal; sem validação clínica",
+    "suppressLegacyFormula": true,
+    "formulaOverride": "BED = n × d × (1 + d/(α/β)); EQD2 = BED/(1 + 2/(α/β)). Modelo linear-quadrático simplificado; não representa limites de órgãos nem plano de tratamento."
+  },
+  "sourceFile": {
+    "path": "app/content/ferramentas/onco-diagnostico.php",
+    "sha256": "29e7fd6aab1f8bf937a34267255855c21f804696da2b4817d6197578cdcbe743",
+    "bytes": 78570
+  },
+  "clinicalValidation": "not-performed"
+}
